@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://monitorops.centralserver.com.br/support/nslookup.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+</head><body class="dark-mode"><input type="hidden" id="custId" name="custId" value="By L.M - https://www.linkedin.com/in/luanmello/">
+<title>
+Consulta Info Domain;
+</title>
+<script src="./Consulta Info Domain;_files/angular.min.js.transferir"></script>
+<script type="text/javascript">
+
+var app = angular.module('postserviceApp', []);
+
+	app.controller('postserviceCtrl', function ($scope, $http) {
+
+$scope.name = null;
+$scope.postdata = function (name) {
+var data = {
+
+name: name
+
+};
+	
+//limpa campos
+$scope.statusval = "";
+$scope.statustext = "";
+$scope.headers = "";	
+$scope.hostname_entrada_a  = "";
+	 $scope.hostname_mxs  = "";
+	$scope.hostname_mx  = "";
+	//$scope.hostname_mx2 = "";
+    $scope.hostname_ns1 = "";
+	$scope.hostname_ns2 = "";
+	 $scope.hostname_ns3  = "";
+	$scope.hostname_ns4  = "";
+	
+	 $scope.hostname_txt1 = "";
+	 $scope.hostname_txt2 = "";
+	 $scope.hostname_txt3  = "";
+	 $scope.hostname_txt4  = "";
+	 $scope.hostname_txt5 = "";
+	 $scope.hostname_txt6  = "";
+	 $scope.hostname_txt7 = "";
+	 $scope.hostname_txt8  = "";
+	 $scope.hostname_txt9  = "";
+	 $scope.hostname_txt10 = "";
+	$scope.hostname_entrada_smtp ="";
+	$scope.hostname_entrada_mail = "";
+	
+	$scope.hostname_domain_status = "";
+	$scope.hostname_mx_ip = "";
+	$scope.hostname_mx_ip_2 = "";
+	$scope.hostname_domain_status ="";
+	
+//fecha limpa campos	
+		
+	
+	
+$http.get('https://rdap.registro.br/domain/'+ (data.name)).then(function (response) {
+		
+	if (response.data)
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+	
+	$scope.hostname_domain_status = response.data.status;
+	//$scope.hostname_success = "https://i.pinimg.com/originals/b6/b4/29/b6b4292ab790ba56d997cbff83c0dc43.gif";
+}, function (response) {
+
+$scope.msg = "Service not Exists";
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+	$scope.hostname_domain_status = response.data.status;
+	
+	//$scope.hostname_success ="https://64.media.tumblr.com/1ae4376bb254c057a231d9bbeb50ba97/tumblr_osaf14WWqg1ro8ysbo1_500.gif";
+	
+	
+	
+	
+	
+	
+	
+	
+
+});		
+	
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//----------------------------Call the services
+$http.get('https://networkcalc.com/api/dns/lookup/'+ (data.name)).then(function (response) {
+
+	
+	
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+if (response.data)
+	
+	
+
+$scope.msg = "Post Data Submitted Successfully!";
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();	
+
+  $scope.hostname_ns1 = response.data.records.NS[0]["nameserver"];
+ $scope.hostname_entrada_a = response.data.records.A[0]["address"];
+       
+	$scope.hostname_mx = response.data.records.MX[0]["exchange"];
+
+
+
+
+	//$scope.hostname_domain_status = response.data.status;
+	//$scope.hostname_success = "https://i.pinimg.com/originals/b6/b4/29/b6b4292ab790ba56d997cbff83c0dc43.gif";
+
+	
+	
+	 $scope.hostname_mxs = response.data.records.MX;
+	
+	//$scope.hostname_mx2 = response.data.records.MX[1]["exchange"];
+    
+	
+	 $scope.hostname_txt1 = response.data.records.TXT[0];
+	 $scope.hostname_txt2 = response.data.records.TXT[1];
+	 $scope.hostname_txt3 = response.data.records.TXT[2];
+	 $scope.hostname_txt4 = response.data.records.TXT[3];
+	 $scope.hostname_txt5 = response.data.records.TXT[4];
+	 $scope.hostname_txt6 = response.data.records.TXT[5];
+	 $scope.hostname_txt7 = response.data.records.TXT[6];
+	 $scope.hostname_txt8 = response.data.records.TXT[7];
+	 $scope.hostname_txt9 = response.data.records.TXT[8];
+	 $scope.hostname_txt10 = response.data.records.TXT[9];
+	
+
+ $scope.hostname_ns2 = response.data.records.NS[1]["nameserver"];
+         $scope.hostname_ns3 = response.data.records.NS[2]["nameserver"];
+        $scope.hostname_ns4 = response.data.records.NS[3]["nameserver"];
+
+
+
+	
+	$http.get('https://networkcalc.com/api/dns/lookup/'+ (response.data.records.MX[0]["exchange"])).then(function (response) {
+		
+	if (response.data)
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+	$scope.hostname_mx_ip = response.data.records.A[0]["address"];
+	//$scope.hostname_success = "https://i.pinimg.com/originals/b6/b4/29/b6b4292ab790ba56d997cbff83c0dc43.gif";
+
+	
+	
+	}, function (response) {
+
+$scope.msg = "Service not Exists";
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+//$scope.hostname_success ="https://64.media.tumblr.com/1ae4376bb254c057a231d9bbeb50ba97/tumblr_osaf14WWqg1ro8ysbo1_500.gif";
+});	
+	
+	
+		$http.get('https://networkcalc.com/api/dns/lookup/'+ ("mail."+data.name)).then(function (response) {
+		
+	if (response.data)
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+	
+	$scope.hostname_entrada_mail = response.data.records.A[0]["address"];
+	
+}, function (response) {
+
+$scope.msg = "Service not Exists";
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+//$scope.hostname_success ="https://64.media.tumblr.com/1ae4376bb254c057a231d9bbeb50ba97/tumblr_osaf14WWqg1ro8ysbo1_500.gif";
+});		
+		
+	$http.get('https://networkcalc.com/api/dns/lookup/'+ ("smtp."+data.name)).then(function (response) {
+		
+	if (response.data)
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+	//$scope.hostname_success = "https://i.pinimg.com/originals/b6/b4/29/b6b4292ab790ba56d997cbff83c0dc43.gif";
+	$scope.hostname_entrada_smtp = response.data.records.A[0]["address"];
+	
+}, function (response) {
+
+$scope.msg = "Service not Exists";
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+//$scope.hostname_success ="https://64.media.tumblr.com/1ae4376bb254c057a231d9bbeb50ba97/tumblr_osaf14WWqg1ro8ysbo1_500.gif";
+});		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$http.get('https://networkcalc.com/api/dns/lookup/'+ (response.data.records.MX[1]["exchange"])).then(function (response) {
+		
+	if (response.data)
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+	$scope.hostname_mx_ip_2 = response.data.records.A[1]["address"];
+	//$scope.hostname_success = "https://i.pinimg.com/originals/b6/b4/29/b6b4292ab790ba56d997cbff83c0dc43.gif";
+}, function (response) {
+//$scope.hostname_success ="https://64.media.tumblr.com/1ae4376bb254c057a231d9bbeb50ba97/tumblr_osaf14WWqg1ro8ysbo1_500.gif";
+$scope.msg = "Service not Exists";
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+
+});	
+	
+
+	
+
+	
+	
+	
+	
+	
+
+	
+	
+				
+	
+	
+}, function (response) {
+
+$scope.msg = "Service not Exists";
+$scope.statusval = response.status;
+$scope.statustext = response.statusText;
+$scope.headers = response.headers();
+//$scope.hostname_success ="https://64.media.tumblr.com/1ae4376bb254c057a231d9bbeb50ba97/tumblr_osaf14WWqg1ro8ysbo1_500.gif";
+})
+
+	
+};
+	
+});
+	
+	
+</script>
+<link rel="stylesheet" href="./Consulta Info Domain;_files/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+
+
+
+<div ng-app="postserviceApp" ng-controller="postserviceCtrl" class="ng-scope">
+ <p align="right">
+ 
+</p>	
+
+<div class="col-7">
+  <label for="darkModeToggle">Modo Noturno</label>
+  <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"><br>
+
+
+	<label>Digite Domain : </label> <input type="text" id="myInput" class="form-control ng-valid ng-dirty ng-valid-parse ng-touched" placeholder="Insira seu dominio" ng-model="name"><br>
+
+<input id="myBtn" class="btn btn-success" type="button" value="Send" ng-click="postdata(name)"> <br><br>
+
+<script>
+var input = document.getElementById("myInput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("myBtn").click();
+  }
+});
+</script>
+
+ 
+	
+</div>
+
+
+
+			
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>Output Message</th>
+      <th>StatusCode</th>
+      <th>Status</th>
+		<th>Response Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="ng-binding"> Post Data Submitted Successfully!</td>
+      <td class="ng-binding">200</td>
+      <td class="ng-binding">OK</td>
+		 <td class="ng-binding">{"content-type":"application/json; charset=utf-8"}</td>
+    </tr>
+   
+  </tbody>
+</table>			
+			
+			
+			
+			
+
+
+	
+	
+	
+	<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>Status do dominio</th>
+      <th>Entrada em A</th>
+      <th>Entrada MX</th>
+		<th>Entrada MX2</th>
+		<th>Info detalhada  MX</th>
+		<th>Entrada CNAME MAIL</th>
+		<th>Entrada CNAME SMTP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="ng-binding"> ["active"]</td>
+      <td class="ng-binding">177.101.144.110</td>
+      <td class="ng-binding"> mx.lamisul.com.br  | IP : 177.101.150.41 </td>
+		 <td class="ng-binding">  | IP : </td>
+		<td class="ng-binding">[{"exchange":"mx.lamisul.com.br","priority":0}]</td>
+		<td class="ng-binding"> 177.101.150.40</td>
+		<td class="ng-binding"> 177.101.150.43</td>
+    </tr>
+   
+  </tbody>
+</table>			
+			
+	
+	
+	
+
+	
+	<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>Entrada NS</th>
+      <th>Entrada NS</th>
+      <th>Entrada NS</th>
+		<th>Entrada NS</th>
+		<th>Entradas TXT</th>
+		
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="ng-binding"> dns3.lamisul.com.br</td>
+      <td class="ng-binding">dns2.lamisul.com.br</td>
+      <td class="ng-binding"> dns1.lamisul.com.br  </td>
+		 <td class="ng-binding">dns4.lamisul.com.br </td>
+		<td class="ng-binding"> v=spf1 ip4:200.98.199.5 include:_spf.hospedagemweb.net -all |  |  | | </td>
+		
+    </tr>
+   
+  </tbody>
+</table>			
+			
+
+
+
+ <script>
+    function toggleDarkMode() {
+      const body = document.querySelector('body');
+      const checkbox = document.getElementById('darkModeToggle');
+
+      if (checkbox.checked) {
+        body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', true);
+      } else {
+        body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', false);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const savedMode = localStorage.getItem('darkMode') === 'true';
+
+      if (savedMode) {
+        const checkbox = document.getElementById('darkModeToggle');
+        checkbox.checked = true;
+        document.querySelector('body').classList.add('dark-mode');
+      }
+    });
+  </script>
+
+
+
+
+	
+	
+  <style>
+    .dark-mode {
+      background-color: #222;
+      color: #fff;
+    }
+  </style>	
+	
+	
+	
+	
+	
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style></style></body></html>
